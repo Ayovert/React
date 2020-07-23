@@ -1,6 +1,5 @@
-import React, {Component} from 'react'
+import React, {Component} from 'react';
 import {Card, CardImg, CardImgOverlay, CardTitle, CardBody, CardText} from 'reactstrap'
-import { id } from 'postcss-selector-parser';
 
 
 class DishDetail extends Component{
@@ -18,7 +17,7 @@ class DishDetail extends Component{
     renderDish(dish){
         if (dish != null){
             return(
-               <Card className="mt-2">
+                     <Card  className="mt-2">
                    <CardImg src={dish.image} alt="{dish.name}" />
                    <CardBody>
                         <CardTitle>{dish.name}</CardTitle>
@@ -28,6 +27,8 @@ class DishDetail extends Component{
                     </CardBody>    
 
                </Card>
+
+              
             );
 
         }
@@ -41,11 +42,16 @@ class DishDetail extends Component{
            const COMMENT = dish.comments.map((comments) => {
                 return(
                     <ul className='list-unstyled'>
-                    <li key={id}>
+                    <li key={comments.id}>
                     {comments.comment} 
-                    <p>-- {comments.author}, {comments.date}   </p>
+                    <p>-- {comments.author}, {" "},
+                    {new Intl.DateTimeFormat('en-US', 
+                    { year: 'numeric', month: 'short', day: '2-digit'})
+                    .format(new Date(Date.parse(comments.date)))}</p>
                     </li>
-                </ul>
+                    </ul>
+                    
+                    
                 )
                 
            });
@@ -65,16 +71,20 @@ class DishDetail extends Component{
 
     render(){
         return(
-            <div className="row">
-            <div className = "col-12 col-md-5 m-1">
-            { this.renderDish(this.props.selectedDish)}
+    <div className="container">
+      <div className="row">
+        <div className = "col-12 col-md-5 m-1">
+            { this.renderDish(this.props.dish)}
         </div>
 
         <div className = "col-12 col-md-5 m-1">
-               { this.renderComment(this.props.selectedDish) }
+               { this.renderComment(this.props.dish) }
         </div>
-        </div>
+       </div>
         
+
+    </div>
+            
         )
     }
 }
