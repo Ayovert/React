@@ -3,8 +3,8 @@ import { Card, CardImg, CardImgOverlay, CardText, CardBody, CardTitle } from 're
 
 
 
-   
-    /*renderDish(dish) {
+
+   /* renderDish(dish) {
         if (dish!=null) {
             return(
                 <Card>
@@ -37,8 +37,7 @@ import { Card, CardImg, CardImgOverlay, CardText, CardBody, CardTitle } from 're
         );
         
 
-    }
-
+}
     const Menu = (props) => {
 
         const menu = props.dishes.map((dish) => {
@@ -49,7 +48,7 @@ import { Card, CardImg, CardImgOverlay, CardText, CardBody, CardTitle } from 're
             );
         });
 
-        console.log("Menu Component render is invoked");
+       
 
         return (
             <div className="container">
