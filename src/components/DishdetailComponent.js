@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
 import {Card, CardImg, CardImgOverlay, CardTitle, CardBody, CardText,
-Breadcrumb, BreadcrumbItem,Button, Modal, ModalHeader, ModalBody,Label, Row, Col} from 'reactstrap';
-import { Link } from 'react-router-dom';
+Breadcrumb, BreadcrumbItem,Button, Modal, ModalHeader, ModalBody,Label, Row} from 'reactstrap';
 import { Control, Errors, LocalForm } from 'react-redux-form';
+import { Link } from 'react-router-dom';
+
 
 
 
@@ -99,22 +100,22 @@ class Comment extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            isModalOpen: false
+            isCommentModalOpen: false
         };
 
-        this.handleSubmit = this.handleSubmit.bind(this);
-        this.toggleModal = this.toggleModal.bind(this);
+        this.handleCommentSubmit = this.handleCommentSubmit.bind(this);
+        this.toggleCommentModal = this.toggleCommentModal.bind(this);
         
     }
 
-    toggleModal() {
+    toggleCommentModal() {
         this.setState({
-            isModalOpen: !this.state.isModalOpen
+            isCommentModalOpen: !this.state.isCommentModalOpen
 
         });
     }
 
-    handleSubmit(values){
+    handleCommentSubmit(values){
         console.log('Current State is:'+ JSON.stringify(values));
         alert('Current State is:' + JSON.stringify(values));
     }
@@ -124,17 +125,17 @@ class Comment extends Component {
             <React.Fragment>
                  <div className="container">
                 <div className="mt-6"> 
-                <Button outline onClick={this.toggleModal}>
+                <Button outline onClick={this.toggleCommentModal}>
                     <span className="fa fa-pencil fa-lg"></span> Submit Comment
                 </Button>
 
                 </div>
                 
-                <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal}>
-                <ModalHeader toggle={this.toggleModal}>Submit Comment</ModalHeader>
+                <Modal isOpen={this.state.isCommentModalOpen} toggle={this.toggleCommentModal}>
+                <ModalHeader toggle={this.toggleCommentModal}>Submit Comment</ModalHeader>
                 <ModalBody> 
                 <div className="col-12">
-                        <LocalForm onSubmit={(values) => this.handleSubmit(values)}>
+                        <LocalForm onSubmit={(values) => this.handleCommentSubmit(values)}>
                         <Row className="form-group"> 
                             <Label htmlFor="rating">Rating</Label>
                             <Control.select model=".rating" name="rating" 
