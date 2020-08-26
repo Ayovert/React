@@ -100,7 +100,8 @@ class Contact extends Component {
                             <Label htmlFor="lastname" md={2}>Last Name</Label>
                             <Col md={10}>
                             <Control.text model=".lastname" name="lastname" placeholder="Last Name" 
-                                className="form-control"validators={{
+                                className="form-control"
+                                validators={{
                                     required, minLength: minLength(3),maxLength: maxLength(15)
                                 }} />
                                 <Errors 
@@ -121,7 +122,8 @@ class Contact extends Component {
                             <Label htmlFor="telnum" md={2}>Contact Tel.</Label>
                             <Col md={10}>
                             <Control.text model=".telnum" id="telnum" name="telnum" placeholder="Tel. Num" 
-                                className="form-control"validators={{
+                                className="form-control"
+                                validators={{
                                     required, minLength: minLength(3),maxLength: maxLength(15), isNumber
                                 }} />
                                 <Errors 
@@ -143,7 +145,8 @@ class Contact extends Component {
                             <Label htmlFor="email" md={2}>Email</Label>
                             <Col md={10}>
                             <Control.text model=".email" id="email" name="email" placeholder="Email" 
-                                className="form-control"validators={{
+                                className="form-control"
+                                validators={{
                                     required, validEmail
                                 }} />
                                 <Errors 

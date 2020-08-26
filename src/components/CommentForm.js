@@ -1,94 +1,8 @@
-import React, {Component} from 'react';
-import {Card, CardImg, CardImgOverlay, CardTitle, CardBody, CardText,
-Breadcrumb, BreadcrumbItem,Button, Modal, ModalHeader, ModalBody,Label, Row, Col} from 'reactstrap';
-import { Link } from 'react-router-dom';
+import React, { Component } from 'react';
+import {Navbar, NavbarBrand, Nav, NavbarToggler, Collapse, NavItem, Jumbotron, 
+Button, Modal, ModalHeader, ModalBody,Label, Row , Col } from 'reactstrap';
+import { NavLink} from 'react-router-dom';
 import { Control, Errors, LocalForm } from 'react-redux-form';
-
-
-
-    function RenderDish({dish}) {
-        if (dish != null){
-            return(
-                <div className = "col-12 col-md-5 m-1">
-                     <Card  className="mt-2">
-                   <CardImg src={dish.image} alt="{dish.name}" />
-                   <CardBody>
-                        <CardTitle>{dish.name}</CardTitle>
-                        <CardText>
-                            {dish.description}
-                        </CardText>
-                    </CardBody>    
-
-               </Card>
-               </div>
-
-              
-            );
-
-        }
-        else return(
-            <div></div>
-        );
-    }
-
-    function RenderComment({comments}){
-        comments = Array.from(comments);
-        if (comments!= null){
-                return(
-                    <div className = "col-12 col-md-5 m-1">
-                        <h4>Comments</h4>
-                    <ul className='list-unstyled'>
-                    {comments.map((comment) => { 
-                        return(
-                    <li key={comment.id}>
-                    {comment.comment} 
-                    <p>-- {comment.author}, {" "},
-                    {new Intl.DateTimeFormat('en-US', 
-                    { year: 'numeric', month: 'short', day: '2-digit'})
-                    .format(new Date(Date.parse(comment.date)))}</p>
-                    </li>
-                        );
-                })}
-
-                    <Comment/>
-                    </ul>
-                    
-                    </div>
-                    
-                );
-                
-        }
-        else return(
-            <div></div>
-        );
-    }
-
-    const DishDetail = (props) =>{
-        
-        if(props.dish != null)
-        return(
-    <div className="container">
-        <div className="row">
-                    <Breadcrumb>
-                    <BreadcrumbItem><Link to='/home'>Home</Link></BreadcrumbItem>
-                    <BreadcrumbItem><Link to='/menu'>Menu</Link></BreadcrumbItem>
-                    <BreadcrumbItem active>{props.dish.name}</BreadcrumbItem>
-                    </Breadcrumb>
-                </div>
-      <div className="row">
-            <RenderDish dish={props.dish} />
-            <RenderComment comments={props.comments} />
-        </div>
-       </div>  
-            
-        );
-        else return (
-            <div></div>
-        );
-    }
-
-
-export default DishDetail;
 
 const required = (val) => val && val.length;
 const maxLength = (len) =>(val) => !(val) || (val.length <= len);
@@ -115,14 +29,13 @@ class Comment extends Component {
     }
 
     handleSubmit(values){
-        console.log('Current State is:'+ JSON.stringify(values));
-        alert('Current State is:' + JSON.stringify(values));
+        console.log("Current State is:" + JSON.stringify(values));
+        alert("Current State is:" + JSON.stringify(values));
     }
 
     render() {
         return(
-            <React.Fragment>
-                 <div className="container">
+            <div className="container">
                 <div className="mt-6"> 
                 <Button outline onClick={this.toggleModal}>
                     <span className="fa fa-pencil fa-lg"></span> Submit Comment
@@ -139,15 +52,14 @@ class Comment extends Component {
                             <Label htmlFor="rating">Rating</Label>
                             <Control.select model=".rating" name="rating" 
                                    className="form-control">
-                                   <option>...</option>
                                    <option>1</option>
                                    <option>2</option> 
                                    <option>3</option>
                                    <option>4</option>
                                    <option>5</option> 
                             </Control.select>
+                            
                             </Row>
-
                             <Row className="form-group"> 
                             <Label htmlFor="author">Your Name</Label>
                                 <Control.text model=".author" id="author" name="author" placeholder="Your Name" 
@@ -189,10 +101,9 @@ class Comment extends Component {
            </Modal>
 
             </div>
-            </React.Fragment>
-           
             
 
-        );
+        )
     }
-}
+} 
+export default Comment;
