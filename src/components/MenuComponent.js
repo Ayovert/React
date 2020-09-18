@@ -70,10 +70,6 @@ const Menu = (props) => {
                     {menu}
 
                 </div>
-
-
-
-
             </div>
 
         );
