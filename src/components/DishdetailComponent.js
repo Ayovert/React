@@ -3,7 +3,8 @@ import {Card, CardImg, CardImgOverlay, CardTitle, CardBody, CardText,
 Breadcrumb, BreadcrumbItem,Button, Modal, ModalHeader, ModalBody,Label, Row} from 'reactstrap';
 import { Control, Errors, LocalForm } from 'react-redux-form';
 import { Link } from 'react-router-dom';
-import {Loading} from './LoadingComponent'
+import {Loading} from './LoadingComponent';
+import { baseUrl } from '../shared/baseUrl';
 
 const required = (val) => val && val.length;
 const maxLength = (len) =>(val) => !(val) || (val.length <= len);
@@ -14,7 +15,7 @@ const minLength = (len) =>(val) => (val) && (val.length >= len);
             return(
                 <div className = "col-12 col-md-5 m-1">
                      <Card  className="mt-2">
-                   <CardImg src={dish.image} alt="{dish.name}" />
+                   <CardImg src={baseUrl + dish.image} alt="{dish.name}" />
                    <CardBody>
                         <CardTitle>{dish.name}</CardTitle>
                         <CardText>
@@ -208,9 +209,9 @@ const minLength = (len) =>(val) => (val) && (val.length >= len);
        </div>  
             
         );
-        else return (
+      /*  else return (
             <div></div>
-        );
+        );*/
     }
 
 
