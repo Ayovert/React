@@ -4,9 +4,11 @@ import { Dishes } from './dishes';
 import { Comments } from './comments';
 import { Leaders } from './leaders';
 import { Promotions } from './promotions';
+import { Cards } from './cards'
 import thunk from 'redux-thunk';
 import logger from 'redux-logger';
-import { InitialFeedback } from './forms';
+import { InitialFeedback,InitialCard } from './forms';
+
 
 export const ConfigureStore = () => {
     const store = createStore(
@@ -15,9 +17,12 @@ export const ConfigureStore = () => {
             comments: Comments,
             promotions: Promotions,
             leaders: Leaders,
+            cards: Cards,
             ...createForms({
-                feedback:InitialFeedback
-            })     
+                feedback:InitialFeedback,
+                card:InitialCard
+            }),  
+
          }),
          applyMiddleware(thunk, logger)
     );

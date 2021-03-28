@@ -1,5 +1,5 @@
 import * as ActionTypes from './ActionTypes';
-import { baseUrl } from '../shared/baseUrl'; 
+import { baseUrl} from '../shared/baseUrl'; 
 
 export const addComment = (comment) => ({
     type:ActionTypes.ADD_COMMENT,
@@ -10,6 +10,12 @@ export const addComment = (comment) => ({
 export const addFeedback = (feedback) => ({
     type:ActionTypes.ADD_FEEDBACK,
     payload: feedback
+
+});
+
+export const addCard = (card) => ({
+    type:ActionTypes.ADD_CARD,
+    payload: card
 
 });
 
@@ -99,7 +105,64 @@ export const postFeedback = (feedbackId, firstname,lastname,telnum,email,agree,c
     .catch(error => {console.log('Post Feedback', error.message);
 alert('Your Feedback could not be posted \nError:' + error.message)});
 };
+
+
+export const postCard = (cardId, amount,firstName,lastName,email,nameOnCard,dob,idNo,idType,currency,
+isPhysicalCard,address,stateId,localId,phoneNumber,secretKey) =>
+ (dispatch) => {
+    
+    const newCard = {
+        cardId: cardId,
+        amount: amount,
+firstName: firstName,
+lastName: lastName,
+email: email,
+nameOnCard: nameOnCard,
+dob: dob,
+idNo: idNo,
+idType:idType,
+currency: currency,
+isPhysicalCard: isPhysicalCard,
+address: address,
+stateId: stateId,
+localId: localId,
+phoneNumber: phoneNumber,
+secretKey: secretKey
+    }
+
+    newCard.date = new Date().toISOString();
+
+    return fetch(baseUrl + 'card', {
+        method: 'POST',
+        body: JSON.stringify(newCard),
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        credentials: 'same-origin'
+    })
+    .then(response => {
+        if(response.ok){
+            return response;
+        }
+
+        else{
+           var error = new Error('Error ' + response.status + ' : ' + response.statusText);
+           error.response = response;
+           throw error;
+        }
+    },
+    error => {
+        var errmess = new Error(error.message);
+        throw errmess;
+    })
+
+    .then(response => response.json())
+    .then(response => dispatch(addCard(response)))
+    .catch(error => {console.log('Create Card', error.message);
+alert('Your Card could not be posted \nError:' + error.message)});
+};
 //thunk to load and dishes
+
 export const fetchDishes = () => (dispatch) => {
     dispatch(dishesLoading(true));
 

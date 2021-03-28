@@ -4,13 +4,15 @@ import About from './AboutComponent';
 import Menu from './MenuComponent';
 import Contact from './ContactComponent';
 import DishDetail from './DishdetailComponent';
+import CardComponent from './CardComponent';
 import Header from './HeaderComponent';
 import Footer from './FooterComponent';
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { postComment, postFeedback, fetchDishes, fetchComments, fetchPromos, fetchLeaders } from '../redux/ActionCreators'
+import { postComment, postFeedback, postCard, fetchDishes, fetchComments, fetchPromos, fetchLeaders } from '../redux/ActionCreators'
 import { actions } from 'react-redux-form';
 import { TransitionGroup, CSSTransition } from 'react-transition-group'
+
 
 const mapStateToProps = state => {
   return {
@@ -23,12 +25,20 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = (dispatch) => ({
   postComment: (dishId, rating, author, comment) => dispatch(postComment(dishId, rating, author, comment)),
-  postFeedback: (feedbackId, firstname,lastname,telnum,email,agree,contactType,message) => dispatch(postFeedback(feedbackId, firstname,lastname,telnum,email,agree,contactType,message)),
+  postFeedback: (feedbackId, firstname,lastname,telnum,email,agree,contactType,message) => 
+  dispatch(postFeedback(feedbackId, firstname,lastname,telnum,email,agree,contactType,message)),
+  postCard: (cardId, amount, firstName, lastName, email, nameOnCard, dob,idNo,
+    idType, currency, isPhysicalCard, address, 
+    stateId, localId, phoneNumber, secretKey) => 
+    dispatch(postCard(cardId, amount, firstName, lastName, email, nameOnCard, dob,idNo,
+      idType, currency, isPhysicalCard, address, 
+      stateId, localId, phoneNumber, secretKey)),
   fetchDishes: () => { dispatch(fetchDishes()) },
   fetchComments: () => { dispatch(fetchComments()) },
   fetchPromos: () => { dispatch(fetchPromos()) },
   fetchLeaders: () => { dispatch(fetchLeaders()) },
-  resetFeedbackForm: () => { dispatch(actions.reset('feedback')) }
+  resetFeedbackForm: () => { dispatch(actions.reset('feedback')) },
+  resetCard: () => { dispatch(actions.reset('card')) }
 
 });
 class Main extends Component {
@@ -91,6 +101,7 @@ class Main extends Component {
               <Route path="/home" component={HomePage} />
               <Route exact path="/aboutus" component={() => <About leaders={this.props.leaders} />} />
               <Route exact path="/menu" component={() => <Menu dishes={this.props.dishes} />} />
+              <Route exact path="/card" component={() => <CardComponent postCard={this.props.postCard}  resetCard={this.props.resetCard} />} />
               <Route path="/menu/:dishId" component={DishWithId} />
               <Route exact path="/contactus" component={() => <Contact postFeedback={this.props.postFeedback} resetFeedbackForm={this.props.resetFeedbackForm} />} />
               <Redirect to="/home" />
