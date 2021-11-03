@@ -1,4 +1,3 @@
-import { LEADERS } from '../shared/leaders.js';
 import * as ActionTypes from './ActionTypes';
 
 export const Leaders = (state = {

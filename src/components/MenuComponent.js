@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-    Card, CardImg, CardImgOverlay, CardText, CardBody, CardTitle,
+    Card, CardImg, CardImgOverlay, CardTitle,
     Breadcrumb, BreadcrumbItem
 } from 'reactstrap';
 import { Link } from 'react-router-dom';

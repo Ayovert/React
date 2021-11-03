@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {Navbar, NavbarBrand, Nav, NavbarToggler, Collapse, NavItem, Jumbotron, 
     Button, Modal, ModalHeader, ModalBody, Form,
-    FormGroup, FormFeedback, Label, Input } from 'reactstrap';
+    FormGroup, Label, Input } from 'reactstrap';
 import { NavLink } from 'react-router-dom';
 
 
@@ -26,7 +26,6 @@ class Header extends Component {
     toggleModal() {
         this.setState({
             isModalOpen: !this.state.isModalOpen
-
         });
     }
 
@@ -68,6 +67,11 @@ class Header extends Component {
                        <NavItem>
                            <NavLink className="nav-link" to="/card">
                                <span className="fa fa-credit-card fa-lg"></span> Card
+                           </NavLink>
+                       </NavItem>
+                       <NavItem>
+                           <NavLink className="nav-link" to="/cardcomp">
+                               <span className="fa fa-credit-card fa-lg"></span> Card Component
                            </NavLink>
                        </NavItem>
                        <NavItem>

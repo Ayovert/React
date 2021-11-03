@@ -1,5 +1,5 @@
 import * as ActionTypes from './ActionTypes';
-import { baseUrl} from '../shared/baseUrl'; 
+import { baseUrl, walletUrl} from '../shared/baseUrl'; 
 
 export const addComment = (comment) => ({
     type:ActionTypes.ADD_COMMENT,
@@ -18,6 +18,8 @@ export const addCard = (card) => ({
     payload: card
 
 });
+
+
 
 export const postComment = (dishId, rating, author, comment) => (dispatch) => {
     
@@ -107,8 +109,7 @@ alert('Your Feedback could not be posted \nError:' + error.message)});
 };
 
 
-export const postCard = (cardId, amount,firstName,lastName,email,nameOnCard,dob,idNo,idType,currency,
-isPhysicalCard,address,stateId,localId,phoneNumber,secretKey) =>
+export const postCard = (cardId, amount,firstName,lastName, telNum, email,nameOnCard,dob,idNo,idType,currency, isPhysicalCard, address, stateId, localId, phoneNumber, secretKey) =>
  (dispatch) => {
     
     const newCard = {
@@ -116,6 +117,7 @@ isPhysicalCard,address,stateId,localId,phoneNumber,secretKey) =>
         amount: amount,
 firstName: firstName,
 lastName: lastName,
+telNum: telNum,
 email: email,
 nameOnCard: nameOnCard,
 dob: dob,
@@ -132,16 +134,19 @@ secretKey: secretKey
 
     newCard.date = new Date().toISOString();
 
-    return fetch(baseUrl + 'card', {
+    return fetch(walletUrl, {
         method: 'POST',
         body: JSON.stringify(newCard),
-        headers: {
-            'Content-Type': 'application/json'
+        headers:{
+    "Authorization": "Bearer " + "4ka7vzvp7j9k",
+    "Content-Type": "application/json",
+    "accept": "application/json"
         },
-        credentials: 'same-origin'
+        credentials: 'include'
     })
     .then(response => {
         if(response.ok){
+            alert(console.log(response));
             return response;
         }
 
@@ -157,6 +162,9 @@ secretKey: secretKey
     })
 
     .then(response => response.json())
+    .then(response => {
+        (console.log(response));
+      })
     .then(response => dispatch(addCard(response)))
     .catch(error => {console.log('Create Card', error.message);
 alert('Your Card could not be posted \nError:' + error.message)});
@@ -172,6 +180,7 @@ export const fetchDishes = () => (dispatch) => {
             return response;
         }
 
+        
         else{
            var error = new Error('Error ' + response.status + ' : ' + response.statusText);
            error.response = response;

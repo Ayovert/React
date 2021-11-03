@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {
-    Card, CardImg, CardImgOverlay, CardTitle, CardBody, CardText,
+    Card, CardImg, CardTitle, CardBody, CardText,
     Breadcrumb, BreadcrumbItem, Button, Modal, ModalHeader, ModalBody, Label, Row
 } from 'reactstrap';
 import { Control, Errors, LocalForm } from 'react-redux-form';

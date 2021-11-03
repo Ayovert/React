@@ -1,9 +1,6 @@
 export const ADD_COMMENT = 'ADD_COMMENT';
 export const ADD_FEEDBACK = 'ADD_FEEDBACK';
 export const ADD_CARD = 'ADD_CARD';
-export const ADD_CARDS = 'ADD_CARDS';
-export const CARD_LOADING = 'CARD_LOADING';
-export const CARD_FAILED = 'CARD_FAILED';
 export const DISHES_LOADING = 'DISHES_LOADING';
 export const DISHES_FAILED = 'DISHES_FAILED';
 export const ADD_DISHES = 'ADD_DISHES';

@@ -7,6 +7,7 @@ import DishDetail from './DishdetailComponent';
 import CardComponent from './CardComponent';
 import Header from './HeaderComponent';
 import Footer from './FooterComponent';
+import CardComp from './CardComp';
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { postComment, postFeedback, postCard, fetchDishes, fetchComments, fetchPromos, fetchLeaders } from '../redux/ActionCreators'
@@ -24,15 +25,16 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  postComment: (dishId, rating, author, comment) => dispatch(postComment(dishId, rating, author, comment)),
+  postComment: (dishId, rating, author, comment) => {dispatch(postComment(dishId, rating, author, comment))},
   postFeedback: (feedbackId, firstname,lastname,telnum,email,agree,contactType,message) => 
-  dispatch(postFeedback(feedbackId, firstname,lastname,telnum,email,agree,contactType,message)),
-  postCard: (cardId, amount, firstName, lastName, email, nameOnCard, dob,idNo,
+  {dispatch(postFeedback(feedbackId, firstname,lastname,telnum,email,agree,contactType,message))},
+
+  postCard: (cardId, amount, firstName, lastName, telNum, email, nameOnCard, dob,idNo,
     idType, currency, isPhysicalCard, address, 
     stateId, localId, phoneNumber, secretKey) => 
-    dispatch(postCard(cardId, amount, firstName, lastName, email, nameOnCard, dob,idNo,
-      idType, currency, isPhysicalCard, address, 
-      stateId, localId, phoneNumber, secretKey)),
+    {dispatch(postCard(cardId, amount, firstName, lastName, telNum, email, nameOnCard, dob,idNo, idType, currency, isPhysicalCard, address, 
+      stateId, localId, phoneNumber, secretKey))},
+
   fetchDishes: () => { dispatch(fetchDishes()) },
   fetchComments: () => { dispatch(fetchComments()) },
   fetchPromos: () => { dispatch(fetchPromos()) },
@@ -42,10 +44,6 @@ const mapDispatchToProps = (dispatch) => ({
 
 });
 class Main extends Component {
-  constructor(props) {
-    super(props);
-
-  }
 
   componentDidMount() {
     this.props.fetchDishes();
@@ -102,6 +100,7 @@ class Main extends Component {
               <Route exact path="/aboutus" component={() => <About leaders={this.props.leaders} />} />
               <Route exact path="/menu" component={() => <Menu dishes={this.props.dishes} />} />
               <Route exact path="/card" component={() => <CardComponent postCard={this.props.postCard}  resetCard={this.props.resetCard} />} />
+              <Route exact path="/cardcomp" component={() => <CardComp/>} />
               <Route path="/menu/:dishId" component={DishWithId} />
               <Route exact path="/contactus" component={() => <Contact postFeedback={this.props.postFeedback} resetFeedbackForm={this.props.resetFeedbackForm} />} />
               <Redirect to="/home" />
